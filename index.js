@@ -10,7 +10,7 @@
 const chalk =  require('chalk');
 const { spawn } = require("child_process");
 const path = require('path');
-const YAFB_SYSTEM = "app.js";
+const YAFB_SYSTEM = "auto.js";
 
 const YAFB_CORE = path.join(__dirname, YAFB_SYSTEM);
 console.log(chalk.green('[SUCCES] - OctobotRemake is Now Ready to Use'));
