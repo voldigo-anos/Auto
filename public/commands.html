@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commands List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            padding: 10px;
+            background-color: #f4f4f4;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Commands List</h1>
+        <ul id="commands-list"></ul>
+    </div>
+
+    <script>
+        async function fetchCommands() {
+            try {
+                const response = await fetch('/api/commands');
+                const data = await response.json();
+                if (data.success) {
+                    const commandsList = document.getElementById('commands-list');
+                    data.commands.forEach(command => {
+                        const listItem = document.createElement('li');
+                        listItem.textContent = command;
+                        commandsList.appendChild(listItem);
+                    });
+                } else {
+                    console.error('Failed to fetch commands:', data.message);
+                }
+            } catch (error) {
+                console.error('Error fetching commands:', error);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', fetchCommands);
+    </script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Commands List</title>
+
+    <style>
+
+        body {
+
+            font-family: Arial, sans-serif;
+
+        }
+
+        .container {
+
+            width: 80%;
+
+            margin: auto;
+
+            padding: 20px;
+
+        }
+
+        h1 {
+
+            text-align: center;
+
+        }
+
+        .button-container {
+
+            text-align: center;
+
+            margin-top: 20px;
+
+        }
+
+        .btn {
+
+            padding: 10px 20px;
+
+            font-size: 16px;
+
+            cursor: pointer;
+
+        }
+
+    </style>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Commands List</h1>
+
+        <div class="button-container">
+
+            <button class="btn" id="show-commands-btn">Show Commands</button>
+
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+
+    <script>
+
+        async function fetchCommands() {
+
+            try {
+
+                const response = await fetch('/api/commands');
+
+                const data = await response.json();
+
+                if (data.success) {
+
+                    const commandItems = data.commands.map(command => `<li>${command}</li>`).join('');
+
+                    Swal.fire({
+
+                        title: 'Commands List',
+
+                        html: `<ul style="list-style-type:none; padding: 0;">${commandItems}</ul>`,
+
+                        width: '600px'
+
+                    });
+
+                } else {
+
+                    Swal.fire('Error', `Failed to fetch commands: ${data.message}`, 'error');
+
+                }
+
+            } catch (error) {
+
+                Swal.fire('Error', `Error fetching commands: ${error.message}`, 'error');
+
+            }
+
+        }
+
+        document.getElementById('show-commands-btn').addEventListener('click', fetchCommands);
+
+    </script>
+
+</body>
+
+</html>
