@@ -28,6 +28,7 @@
     "node-cron": "^3.0.3",
     "node-fetch": "^3.2.6",
     "npmlog": "^1.2.0",
+    "ws3-fca": "^1.0.47",
     "pastebin-api": "^7.0.0",
     "pidusage": "^3.0.2",
     "request": "^2.53.0",
